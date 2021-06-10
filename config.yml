@@ -1,0 +1,164 @@
+host: 0.0.0.0
+port: 8881
+models:
+  bg-pos:
+    rpc-port: 9000
+    rest-port: 8500
+    rest-url: /v1/models/bg-pos:predict
+    export-path: saved-models/bg-pos
+    description: "Part of Speech Tagging for Bulgarian language"
+    # example: curl -X POST http://localhost:8881/bg-pos -d '{"sent": ["Това е прост тест."]}' -H 'Content-Type: application/json'
+    model-type: sequence-tagger
+    timeout: 60 # in seconds
+    active: false
+
+  en-pos:
+    rpc-port: 9001
+    rest-port: 8501
+    rest-url: /v1/models/en-pos:predict
+    export-path: saved-models/en-pos
+    description: "Part of Speech Tagging for English language"
+    # example: curl -X POST http://localhost:8881/en-pos -d '{"sent": ["This is a simple test."]}'  -H 'Content-Type: application/json'
+    model-type: sequence-tagger
+    timeout: 60 # in seconds
+    active: false
+
+  en-it:
+    rpc-port: 9002
+    rest-port: 8502
+    rest-url: /v1/models/en-it:predict
+    export-path: saved-models/en-it
+    tokenizer: pyonmttok
+    description: "English to Italian translation"
+    # example: curl -X POST http://localhost:8881/en-it -d '{"sent": ["This is a simple test."]}' -H 'Content-Type: application/json'
+    model-type: onmt-seq2seq
+    timeout: 60 # in seconds
+    active: false
+
+  it-en:
+    rpc-port: 9003
+    rest-port: 8503
+    rest-url: /v1/models/it-en:predict
+    export-path: saved-models/it-en
+    tokenizer: pyonmttok
+    description: "Italian to English translation"
+    # example: curl -X POST http://localhost:8881/it-en -d '{"sent": ["Questo è un semplice test."]}' -H 'Content-Type: application/json'
+    model-type: onmt-seq2seq
+    timeout: 60 # in seconds
+    active: false
+
+  en-de:
+    rpc-port: 9004
+    rest-port: 8504
+    rest-url: /v1/models/en-de:predict
+    export-path: saved-models/en-de
+    tokenizer: sentencepiece
+    tokenizer-model: wmtende.model
+    description: "English to German translation"
+    # example: curl -X POST http://localhost:8881/en-de -d '{"sent": ["This is a test."]}' -H 'Content-Type: application/json'
+    model-type: onmt-seq2seq
+    timeout: 60 # in seconds
+    active: false
+
+  de-en:
+    rpc-port: 9007
+    rest-port: 8507
+    rest-url: /v1/models/de-en:predict
+    export-path: saved-models/de-en
+    tokenizer: sentencepiece
+    tokenizer-model: wmtende.model
+    description: "English to German translation"
+    # example: curl -X POST http://localhost:8881/de-en -d '{"sent": ["Dies ist ein Test."]}' -H 'Content-Type: application/json'
+    model-type: onmt-seq2seq
+    timeout: 60 # in seconds
+    active: false
+
+  bg-en:
+    rpc-port: 9005
+    rest-port: 8505
+    rest-url: /v1/models/bg-en:predict
+    export-path: saved-models/bg-en
+    tokenizer: pyonmttok
+    bpe-codes: bpe_codes.txt
+    bpe-vocab: vocab.bpe.bg
+    description: "Bulgarian to English translation"
+    # example: curl -X POST http://localhost:8881/bg-en -d '{"sent": ["Това е прост тест."]}' -H 'Content-Type: application/json'
+    model-type: onmt-seq2seq
+    timeout: 60 # in seconds
+    active: false
+
+  en-bg:
+    rpc-port: 9006
+    rest-port: 8506
+    rest-url: /v1/models/en-bg:predict
+    export-path: saved-models/en-bg
+    tokenizer: pyonmttok
+    bpe-codes: bpe_codes.txt
+    bpe-vocab: vocab.bpe.en
+    description: "English to Bulgarian translation"
+    # example: curl -X POST http://localhost:8881/bg-en -d '{"sent": ["This is a simple test."]}' -H 'Content-Type: application/json'
+    model-type: onmt-seq2seq
+    timeout: 60 # in seconds
+    active: false
+
+  fr-en:
+    rpc-port: 9008
+    rest-port: 8508
+    rest-url: /v1/models/fr-en:predict
+    export-path: saved-models/fr-en
+    tokenizer: pyonmttok
+    bpe-codes: bpe_codes.txt
+    bpe-vocab: vocab.bpe.fr
+    description: "French to English translation"
+    # example: curl -X POST http://localhost:8881/fr-en -d '{"sent": ["Il s agit d un essai simple"]}' -H 'Content-Type: application/json'
+    model-type: onmt-seq2seq
+    timeout: 60 # in seconds
+    active: false
+
+  en-fr:
+    rpc-port: 9009
+    rest-port: 8509
+    rest-url: /v1/models/en-fr:predict
+    export-path: saved-models/en-fr
+    tokenizer: pyonmttok
+    bpe-codes: bpe_codes.txt
+    bpe-vocab: vocab.bpe.en
+    description: "English to French translation"
+    # example: curl -X POST http://localhost:8881/en-fr -d '{"sent": ["This is a simple test"]}' -H 'Content-Type: application/json'
+    model-type: onmt-seq2seq
+    timeout: 60 # in seconds
+    active: false
+
+  en-fr-Tatoeba:
+    rpc-port: 9011
+    rest-port: 8501
+    rest-url: /v1/models/en-fr-Tatoeba:predict
+    export-path: saved-models/en-fr-Tatoeba
+    tokenizer: pyonmttok
+    bpe-codes: bpe_codes.txt
+    bpe-vocab: vocab.bpe.en
+    description: "English to French translation"
+    # example: curl -X POST http://localhost:8881/en-fr -d '{"sent": ["This is a simple test"]}' -H 'Content-Type: application/json'
+    model-type: onmt-seq2seq
+    timeout: 60 # in seconds
+    active: false
+
+  fill-in-the-blanks:
+    pos-tagger: en-pos
+    embeddings-file: saved-models/fill-in-the-blanks/glove-word-embeddings/multilingual.gensim
+    description: "Creates a fill-in-the-blanks exercise"
+    # example: curl -X POST http://localhost:8881/fill-in-the-blanks -d '{"lang": "en", "sent": ["This is a test."]}' -H 'Content-Type: application/json'
+    model-type: fill-in-the-blanks
+    timeout: 60 # in seconds
+    active: false
+
+  style-transfer:
+    rpc-port: 9010
+    rest-port: 8510
+    rest-url: /v1/models/style-transfer:predict
+    export-path: saved-models/style-transfer
+    description: "Style Transfer"
+    # example: curl -X POST http://localhost:8881/style-transfer -d '{"content": url, "style": url, "save_as": filename}' -H 'Content-Type: application/json'
+    model-type: style-transfer
+    timeout: 120 # in seconds
+    active: false
